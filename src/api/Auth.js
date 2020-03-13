@@ -10,11 +10,11 @@ export async function login(username, password) {
     };
     let query = new URLSearchParams(authObj);
     console.log(query.toString());
-    let res = await axios.post("http://localhost:8080/login", query.toString());
+    let res = await axios.post("http://localhost:8080/api/v1/login", query.toString());
     console.log(res);
 
     // this is sketch...
-    if(!res.data.includes("Wrong username or password")) {
+    if(res.status == 200) {
         console.log("Successfully logged in " + authObj.username);
         return true;
     } else {
