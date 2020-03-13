@@ -25,11 +25,11 @@ export class AuthProvider extends Component {
         this.state.setState = this.setContextState;
     }
 
-    setContextState = (state) => {
+    setContextState = async (state) => {
         console.log("Updated AuthContext: ");
         console.log(state);
 
-        this.setState(state);
+        await this.setState(state);
         localStorage.setItem('AuthContext', JSON.stringify(this.state));
     };
 
