@@ -1,4 +1,4 @@
-import {getAPI, postAPI} from "./Main";
+import {getAPI} from "./Main";
 import IProblem from "./interfaces/IProblem";
 import {AxiosResponse} from "axios";
 
