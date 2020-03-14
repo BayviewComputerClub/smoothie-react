@@ -13,6 +13,9 @@ console.log("The Smoothie React console is an exciting place...");
 
 // Set axios to use cookies (that smoothie-web sends)
 axios.defaults.withCredentials = true;
+axios.defaults.validateStatus = function () { // We handle http status codes
+    return true;
+};
 
 ReactDOM.render(
     (

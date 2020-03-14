@@ -1,8 +1,7 @@
-import {postAPI} from "./Main";
 import {getCSRFToken} from "./CSRF";
-import axios from "axios";
+import {postAPI} from "./Main";
 
-export async function login(username, password) {
+export async function login(username: string, password: string): Promise<boolean> {
     let authObj = {
         username,
         password,
@@ -10,10 +9,9 @@ export async function login(username, password) {
     };
     let query = new URLSearchParams(authObj);
     console.log(query.toString());
-    let res = await axios.post("http://localhost:8080/api/v1/login", query.toString());
+    let res = await postAPI("login", query.toString());
     console.log(res);
 
-    // this is sketch...
     if(res.status === 200) {
         console.log("Successfully logged in " + authObj.username);
         return true;

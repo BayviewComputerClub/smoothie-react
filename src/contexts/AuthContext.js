@@ -6,7 +6,10 @@ export const defaultAuthState = {
     loginModal: false,
 
     isContest: true,
-    contestName: ""
+    contestName: "",
+
+    isError: true,
+    errorMsg: ""
 };
 
 export const AuthContext = React.createContext(defaultAuthState);
