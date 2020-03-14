@@ -5,10 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import {AuthProvider} from "./contexts/AuthContext";
+import axios from "axios";
 
 console.log("Hello!");
 console.log("The Smoothie React console is an exciting place...");
 // it's not.
+
+// Set axios to use cookies (that smoothie-web sends)
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
     (

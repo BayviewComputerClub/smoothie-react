@@ -3,7 +3,10 @@ import React, {Component} from "react";
 export const defaultAuthState = {
     loggedIn: false,
     username: "",
-    loginModal: false
+    loginModal: false,
+
+    isContest: true,
+    contestName: ""
 };
 
 export const AuthContext = React.createContext(defaultAuthState);
@@ -14,7 +17,7 @@ export class AuthProvider extends Component {
     constructor(props) {
         super(props);
 
-        let storedContext = JSON.parse(localStorage.getItem('AuthContext'));
+        let storedContext = JSON.parse(sessionStorage.getItem('AuthContext'));
         if(storedContext !== null) {
             this.state = storedContext;
         } else {
@@ -30,7 +33,7 @@ export class AuthProvider extends Component {
         console.log(state);
 
         await this.setState(state);
-        localStorage.setItem('AuthContext', JSON.stringify(this.state));
+        sessionStorage.setItem('AuthContext', JSON.stringify(this.state));
     };
 
     render() {

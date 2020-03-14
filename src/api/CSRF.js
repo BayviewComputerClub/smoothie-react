@@ -6,10 +6,6 @@ import _ from "lodash";
 // that's OK though, we can just extract it when needed.
 // todo don't make this so dumb
 export async function getCSRFToken() {
-
-    // Set axios to use cookies (that smoothie-web sends)
-    axios.defaults.withCredentials = true;
-
     let res = await axios.get("http://localhost:8080/login");
     console.log(res);
     let html = res.data;

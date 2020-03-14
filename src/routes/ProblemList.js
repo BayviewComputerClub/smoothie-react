@@ -42,7 +42,9 @@ export default class ProblemList extends React.Component {
             sortBy: {},
             actions: [{
                 title: 'Open',
-                onClick: (event, rowId, rowData, extra) => console.log('clicked on Some action, on row: ', rowId)
+                onClick: (event, rowId, rowData, extra) => {
+                    this.props.history.push(this.state.rows[rowId].name);
+                }
             }]
         };
         this.onSort = this.onSort.bind(this);

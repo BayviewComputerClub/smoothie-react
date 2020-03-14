@@ -14,7 +14,7 @@ export async function login(username, password) {
     console.log(res);
 
     // this is sketch...
-    if(res.status == 200) {
+    if(res.status === 200) {
         console.log("Successfully logged in " + authObj.username);
         return true;
     } else {
