@@ -16,10 +16,7 @@ import {
     SortByDirection
 } from "@patternfly/react-table";
 
-import {
-    Link
-} from "react-router-dom";
-
+import _ from "lodash";
 import {getProblems} from "../api/Problems";
 
 export default class ProblemList extends React.Component {
@@ -43,7 +40,8 @@ export default class ProblemList extends React.Component {
             actions: [{
                 title: 'Open',
                 onClick: (event, rowId, rowData, extra) => {
-                    this.props.history.push(this.state.rows[rowId].name);
+                    let problem = _.find(this.state.data,{prettyName: rowData[0]});
+                    this.props.history.push("/problems/" + problem.name);
                 }
             }]
         };
