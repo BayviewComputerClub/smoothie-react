@@ -45,17 +45,13 @@ class Problem extends Component<IProps, IState> {
         console.log(this.state.data);
     }
 
-    renderLatex() {
-        // todo make this not dumb
-        setTimeout(() => {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: false}
-                ]
-            });
-        }, 0);
+    componentDidUpdate() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: false}
+            ]
+        });
     }
-
 
     render() {
         if(this.state.loading) return (
@@ -72,7 +68,6 @@ class Problem extends Component<IProps, IState> {
                     <Text component={TextVariants.p}><ReactMarkdown className={"problem-statement-area"} source={this.state.data!.problemStatement}/></Text>
                     <Text component={TextVariants.p}>Execution Time Limit: {this.state.data!.limits[0].timeLimit}</Text>
                 </TextContent>
-                {this.renderLatex()}
             </div>
 
         );
