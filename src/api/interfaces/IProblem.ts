@@ -9,5 +9,6 @@ export default interface IProblem {
     totalPointsWorth: number,
     rateOfAC: number,
     usersSolved: number,
-    editorIds: string[]
+    editorIds: string[],
+    timeCreated: number
 }
