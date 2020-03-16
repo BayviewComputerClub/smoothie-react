@@ -2,7 +2,9 @@ import React, {Component} from "react";
 
 import {
     TextContent,
-    Text, TextVariants, Spinner, Button
+    Text,
+    TextVariants,
+    Button
 } from "@patternfly/react-core";
 
 import renderMathInElement from "katex/dist/contrib/auto-render";
@@ -20,6 +22,7 @@ import {MdDataUsage, MdTimer, MdLinearScale} from "react-icons/md";
 import IProblem from "../api/interfaces/IProblem";
 import PageVariant from "../components/PageVariant";
 import {motion} from "framer-motion";
+import WaitingSpinner from "../components/WaitingSpinner";
 
 interface IProps {
     match: any,
@@ -62,9 +65,7 @@ class Problem extends Component<IProps, IState> {
 
     render() {
         if(this.state.loading) return (
-            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100%'}}>
-                <Spinner />
-            </div>
+            <WaitingSpinner />
         );
         return (
             <motion.div initial={"initial"} animate={"animate"} exit={"exit"} variants={PageVariant} key={window.location.pathname}>
@@ -94,7 +95,6 @@ class Problem extends Component<IProps, IState> {
                     <Text component={TextVariants.p}><ReactMarkdown className={"problem-statement-area"} source={this.state.data!.problemStatement}/></Text>
                 </TextContent>
             </motion.div>
-
         );
     }
 

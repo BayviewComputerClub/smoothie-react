@@ -3,21 +3,20 @@ import {
     TextContent,
     Text,
     TextVariants,
-    Spinner
 } from '@patternfly/react-core';
 
 import nl2br from "react-nl2br";
 
 import {getHomeContents} from "../api/Main";
-import {Route} from "react-router-dom";
 import {motion} from "framer-motion";
 import PageVariant from "../components/PageVariant";
+import WaitingSpinner from "../components/WaitingSpinner";
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: false,
             data: {
                 siteName: "",
                 homeContent: "",
@@ -38,9 +37,7 @@ export default class Home extends React.Component {
 
     render() {
         if(this.state.loading) return (
-            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100%'}}>
-                <Spinner />
-            </div>
+            <WaitingSpinner />
         );
 
         return (

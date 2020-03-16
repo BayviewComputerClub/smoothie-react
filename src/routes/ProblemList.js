@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Text,
     TextVariants,
-    Spinner,
 } from '@patternfly/react-core';
 
 import {
@@ -20,6 +19,8 @@ import _ from "lodash";
 import {getProblems} from "../api/Problems";
 
 import PageVariant from "../components/PageVariant";
+
+import WaitingSpinner from "../components/WaitingSpinner";
 
 export default class ProblemList extends React.Component {
     constructor(props) {
@@ -74,9 +75,7 @@ export default class ProblemList extends React.Component {
 
     render() {
         if(this.state.loading) return (
-            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100%'}}>
-                <Spinner />
-            </div>
+            <WaitingSpinner />
         );
 
         const { columns, rows, sortBy, actions } = this.state;
