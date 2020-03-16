@@ -18,6 +18,8 @@ import {ProblemInfoBar, ProblemInfoBarItem, ProblemInfoBarTitle, ProblemInfoBarI
 import {MdDataUsage, MdTimer, MdLinearScale} from "react-icons/md";
 
 import IProblem from "../api/interfaces/IProblem";
+import PageVariant from "../components/PageVariant";
+import {motion} from "framer-motion";
 
 interface IProps {
     match: any,
@@ -65,7 +67,7 @@ class Problem extends Component<IProps, IState> {
             </div>
         );
         return (
-            <div>
+            <motion.div initial={"initial"} animate={"animate"} exit={"exit"} variants={PageVariant} key={window.location.pathname}>
                 <TextContent>
                     <Button css={{}} onClick={() => {this.props.history.goBack();}}>Back</Button>
                     <Text component={TextVariants.h1}>{this.state.data!.prettyName}</Text>
@@ -91,7 +93,7 @@ class Problem extends Component<IProps, IState> {
                     <hr style={{marginTop: "-40px"}}/>
                     <Text component={TextVariants.p}><ReactMarkdown className={"problem-statement-area"} source={this.state.data!.problemStatement}/></Text>
                 </TextContent>
-            </div>
+            </motion.div>
 
         );
     }

@@ -1,11 +1,8 @@
 import React from 'react';
 import {
-    TextContent,
     Text,
     TextVariants,
     Spinner,
-    Button,
-    TextInput
 } from '@patternfly/react-core';
 
 import {
@@ -16,8 +13,13 @@ import {
     SortByDirection
 } from "@patternfly/react-table";
 
+import {motion} from "framer-motion";
+
 import _ from "lodash";
+
 import {getProblems} from "../api/Problems";
+
+import PageVariant from "../components/PageVariant";
 
 export default class ProblemList extends React.Component {
     constructor(props) {
@@ -79,14 +81,13 @@ export default class ProblemList extends React.Component {
 
         const { columns, rows, sortBy, actions } = this.state;
         return (
-            <div>
+            <motion.div initial={"initial"} animate={"animate"} exit={"exit"} variants={PageVariant} key={window.location.pathname}>
                 <Text component={TextVariants.h1} style={{fontSize: "38px"}}>Problems</Text>
                 <Table aria-label="Sortable Table" sortBy={sortBy} onSort={this.onSort} cells={columns} rows={rows} actions={actions}>
                     <TableHeader />
                     <TableBody />
                 </Table>
-
-            </div>
+            </motion.div>
         );
     }
 }

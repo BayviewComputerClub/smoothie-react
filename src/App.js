@@ -26,6 +26,8 @@ import {
 
 import {isMobile} from "react-device-detect";
 
+import { motion, AnimatePresence } from "framer-motion"
+
 // Custom Components
 import RouterNavItem from "./components/RouterNavItem";
 import LoginModal from "./components/LoginModal";
@@ -37,6 +39,7 @@ import ProblemList from "./routes/ProblemList";
 
 // Helpers
 import {AuthContext, defaultAuthState} from "./contexts/AuthContext";
+
 
 class App extends React.Component {
     constructor(props) {
@@ -94,16 +97,47 @@ class App extends React.Component {
             />
         );
 
+        // Nav Things
+
+        const NavAnimation = {
+            visible: {
+                opacity: 1,
+                transition: {
+                    staggerChildren: 0.1,
+
+                },
+            },
+            hidden: {
+                opacity: 0,
+            },
+        };
+        const NavItemAnimation = {
+            visible: {
+                opacity: 1,
+            },
+            hidden: {
+                opacity: 0,
+            },
+        };
+
         const Navigation = (
             <Nav onSelect={this.onSelect} theme="dark">
                 <NavList>
-                    <RouterNavItem name={"Home"} route={"/"} />
-                    <RouterNavItem name={"Problems"} route={"/problems"} />
-                    <RouterNavItem name={"Contests"} route={"/contests"} />
-                    <RouterNavItem name={"Ranking"} route={"/ranking"} />
-                    <NavItem onClick={() => this.handleModalToggle()} preventDefault>
-                        About
-                    </NavItem>
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={NavAnimation}
+                    >
+                        <motion.div variants={NavItemAnimation}><RouterNavItem name={"Home"} route={"/"} /></motion.div>
+                        <motion.div variants={NavItemAnimation}><RouterNavItem name={"Problems"} route={"/problems"} /></motion.div>
+                        <motion.div variants={NavItemAnimation}><RouterNavItem name={"Contests"} route={"/contests"} /></motion.div>
+                        <motion.div variants={NavItemAnimation}><RouterNavItem name={"Ranking"} route={"/ranking"} /></motion.div>
+                        <motion.div variants={NavItemAnimation}>
+                            <NavItem onClick={() => this.handleModalToggle()} preventDefault>
+                                About
+                            </NavItem>
+                        </motion.div>
+                    </motion.div>
                 </NavList>
             </Nav>
         );
@@ -114,11 +148,13 @@ class App extends React.Component {
             <Router>
                 <Page style={{height: "100vh"}} header={Header} sidebar={Sidebar}>
                     <PageSection variant={PageSectionVariants.light}>
-                        <Switch>
-                            <Route component= {Problem} path="/problems/:id" />
-                            <Route component= {ProblemList} path="/problems" />
-                            <Route component= {Home} path="/" />
-                        </Switch>
+                        <AnimatePresence exitBeforeEnter>
+                            <Switch>
+                                <Route component={Problem} path="/problems/:id" />
+                                <Route component={ProblemList} path="/problems" />
+                                <Route component={Home} path="/" />
+                            </Switch>
+                        </AnimatePresence>
                     </PageSection>
 
                     <AboutModal

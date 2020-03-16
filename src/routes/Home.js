@@ -9,6 +9,9 @@ import {
 import nl2br from "react-nl2br";
 
 import {getHomeContents} from "../api/Main";
+import {Route} from "react-router-dom";
+import {motion} from "framer-motion";
+import PageVariant from "../components/PageVariant";
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -41,13 +44,15 @@ export default class Home extends React.Component {
         );
 
         return (
-            <TextContent>
-                <Text component={TextVariants.h1} style={{fontSize: "76px"}}>{this.state.data.siteName}</Text>
-                <Text component={TextVariants.p}>{nl2br(this.state.data.homeContent)}</Text>
-                <br />
-                <i><Text component={TextVariants.p}>And now, a word from our sponsors...</Text></i>
-                <Text component={TextVariants.blockquote}>{this.state.data.tagLine}</Text>
-            </TextContent>
+            <motion.div initial={"initial"} animate={"animate"} exit={"exit"} variants={PageVariant} key={window.location.pathname}>
+                <TextContent>
+                    <Text component={TextVariants.h1} style={{fontSize: "76px"}}>{this.state.data.siteName}</Text>
+                    <Text component={TextVariants.p}>{nl2br(this.state.data.homeContent)}</Text>
+                    <br />
+                    <i><Text component={TextVariants.p}>And now, a word from our sponsors...</Text></i>
+                    <Text component={TextVariants.blockquote}>{this.state.data.tagLine}</Text>
+                </TextContent>
+            </motion.div>
         );
     }
 }
