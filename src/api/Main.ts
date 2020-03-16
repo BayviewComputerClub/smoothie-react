@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 
 import IGeneralSettings from "./interfaces/IGeneralSettings";
 
-export const SMOOTHIE_WEB_API = "http://localhost:8080/";
+export const SMOOTHIE_WEB_API = "https://smoothie.bayview.club/";
 export const SMOOTHIE_WEB_API_URL = SMOOTHIE_WEB_API + "api/v1/";
 
 export async function getAPI<T>(endpoint: string): Promise<AxiosResponse> {

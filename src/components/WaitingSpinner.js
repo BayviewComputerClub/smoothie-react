@@ -9,7 +9,7 @@ export default class WaitingSpinner extends Component {
         };
         setTimeout(() => {
             this.setState({shouldShowSpinner: true});
-        },100)
+        },200)
     }
 
     render() {

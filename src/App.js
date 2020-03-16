@@ -39,6 +39,7 @@ import ProblemList from "./routes/ProblemList";
 
 // Helpers
 import {AuthContext, defaultAuthState} from "./contexts/AuthContext";
+import Rankings from "./routes/Rankings";
 
 
 class App extends React.Component {
@@ -152,6 +153,7 @@ class App extends React.Component {
                             <Switch>
                                 <Route component={Problem} path="/problems/:id" />
                                 <Route component={ProblemList} path="/problems" />
+                                <Route component={Rankings} path="/ranking" />
                                 <Route component={Home} path="/" />
                             </Switch>
                         </AnimatePresence>
