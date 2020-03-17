@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 
 import IGeneralSettings from "./interfaces/IGeneralSettings";
+import IUser from "./interfaces/IUser";
 
 export const SMOOTHIE_WEB_API = "https://smoothie.bayview.club/";
 export const SMOOTHIE_WEB_API_URL = SMOOTHIE_WEB_API + "api/v1/";
@@ -28,4 +29,8 @@ export async function postAPI<T>(endpoint: string, data: any): Promise<AxiosResp
 
 export async function getHomeContents(): Promise<AxiosResponse<IGeneralSettings>> {
     return await getAPI<IGeneralSettings>("home");
+}
+
+export async function getAllUsers(): Promise<AxiosResponse<IUser[]>> {
+    return await getAPI<IUser[]>("ranking");
 }
