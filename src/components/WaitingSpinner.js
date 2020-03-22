@@ -5,11 +5,16 @@ export default class WaitingSpinner extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shouldShowSpinner: false
+            shouldShowSpinner: false,
+            timer: setTimeout(() => {
+                this.setState({shouldShowSpinner: true});
+            },200)
         };
-        setTimeout(() => {
-            this.setState({shouldShowSpinner: true});
-        },200)
+
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.timer);
     }
 
     render() {

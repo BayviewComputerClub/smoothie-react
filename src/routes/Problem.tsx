@@ -13,7 +13,7 @@ import ReactMarkdown from "react-markdown/with-html";
 import Moment from "react-moment";
 
 import {AuthContext} from "../contexts/AuthContext";
-import {getProblem} from "../api/Problems";
+import {getProblem, submitProblemSolution} from "../api/Problems";
 
 import {ProblemInfoBar, ProblemInfoBarItem, ProblemInfoBarTitle, ProblemInfoBarItemContent} from "../components/ProblemInfoBar";
 
@@ -73,6 +73,11 @@ class Problem extends Component<IProps, IState> {
                     <Button css={{}} onClick={() => {this.props.history.goBack();}}>Back</Button>
                     <Text component={TextVariants.h1}>{this.state.data!.prettyName}</Text>
                     <hr />
+
+                    <Button css={{}} onClick={async () => {
+                        await submitProblemSolution("something")
+                    }} >Debug</Button>
+
                     <ProblemInfoBar>
                         <ProblemInfoBarItem>
                             <ProblemInfoBarTitle style={{marginLeft: "10px"}}><MdDataUsage />Points</ProblemInfoBarTitle>

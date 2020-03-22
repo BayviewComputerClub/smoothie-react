@@ -1,11 +1,12 @@
 import {getCSRFToken} from "./CSRF";
-import {postAPI} from "./Main";
+import {getAPI, postAPI} from "./Main";
+import {AxiosResponse} from "axios";
 
 export async function login(username: string, password: string): Promise<boolean> {
     let authObj = {
         username,
         password,
-        _csrf: await getCSRFToken()
+        _csrf: await getCSRFToken("login")
     };
     let query = new URLSearchParams(authObj);
     console.log(query.toString());
@@ -21,4 +22,8 @@ export async function login(username: string, password: string): Promise<boolean
         return false;
     }
 
+}
+
+export async function isAuth(): Promise<boolean> {
+    return ( await getAPI<AxiosResponse<boolean>>("auth-status") ).data
 }

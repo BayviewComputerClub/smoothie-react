@@ -36,7 +36,7 @@ export default class Rankings extends Component<any, IState> {
         let rankingJSX = [];
         for(let i = 0; i < this.state.data!.length; i++) {
             rankingJSX.push(
-              <div>
+              <div key={i}>
                   <Text component={TextVariants.h2}>{this.state.data![i].handle} - {this.state.data![i].points}</Text>
               </div>
             );
