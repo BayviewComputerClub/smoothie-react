@@ -1,4 +1,6 @@
-# smoothie-react
+# smoothie-react (unsupported)
+
+**This repository is no longer maintained**
 
 The new(?) user interface for Smoothie (built in React).
 
