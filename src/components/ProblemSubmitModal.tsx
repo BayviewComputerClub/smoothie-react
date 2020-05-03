@@ -1,30 +1,51 @@
 import React, {Component} from "react";
 
 import {
-    Modal
+    Modal,
+    TextArea,
+    Button
 } from "@patternfly/react-core";
 
-interface IProps {
-    open: boolean,
-    onClose: any
+import {submitProblemSolution} from "../api/Problems";
+
+interface IState {
+    code: string
 }
 
-export default class ProblemSubmitModal extends Component<IProps, any> {
+interface IProps {
+    history: any
+    open: boolean,
+    onClose: any,
+    problemID: string,
+}
+
+export default class ProblemSubmitModal extends Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            code: ""
+        };
+    }
+
+    async submitButton() {
+        let submissionID = await submitProblemSolution(this.props.problemID, this.state.code);
+        this.props.history.push('/problems/submissions/' + submissionID);
     }
 
     render() {
         return (
             <Modal
                 isLarge
-                title="Login"
+                title="Submit Problem Solution"
                 isOpen={this.props.open}
                 onClose={() => this.props.onClose()}
                 isFooterLeftAligned
             >
-                WIP
+                <TextArea onChange={(v) => this.setState({code: v})}/>
+                <br /><br />
+                <Button css={{}} onClick={() => this.submitButton()}>
+                    Submit
+                </Button>
             </Modal>
         );
     }

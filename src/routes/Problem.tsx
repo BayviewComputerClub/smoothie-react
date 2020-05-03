@@ -16,6 +16,7 @@ import {AuthContext} from "../contexts/AuthContext";
 import {getProblem, submitProblemSolution} from "../api/Problems";
 
 import {ProblemInfoBar, ProblemInfoBarItem, ProblemInfoBarTitle, ProblemInfoBarItemContent} from "../components/ProblemInfoBar";
+import ProblemSubmitModal from "../components/ProblemSubmitModal";
 
 import {MdDataUsage, MdTimer, MdLinearScale} from "react-icons/md";
 
@@ -31,6 +32,7 @@ interface IProps {
 
 interface IState {
     loading: boolean,
+    submitModal: boolean,
     data?: IProblem
 }
 
@@ -41,8 +43,8 @@ class Problem extends Component<IProps, IState> {
 
         this.state = {
             loading: true,
+            submitModal: false
         };
-
 
     }
 
@@ -69,14 +71,16 @@ class Problem extends Component<IProps, IState> {
         );
         return (
             <motion.div initial={"initial"} animate={"animate"} exit={"exit"} variants={PageVariant} key={window.location.pathname}>
+                <ProblemSubmitModal history={this.props.history} problemID={this.props.match.params.id} open={this.state.submitModal} onClose={() => {this.setState({submitModal: false})}} />
                 <TextContent>
-                    <Button css={{}} onClick={() => {this.props.history.goBack();}}>Back</Button>
                     <Text component={TextVariants.h1}>{this.state.data!.prettyName}</Text>
                     <hr />
 
                     <Button css={{}} onClick={async () => {
-                        await submitProblemSolution("something")
-                    }} >Debug</Button>
+                        //await submitProblemSolution("aplusb")
+                        this.setState({submitModal: true});
+                    }} >Submit Solution</Button>
+                    <br /><br /><hr />
 
                     <ProblemInfoBar>
                         <ProblemInfoBarItem>
@@ -98,6 +102,8 @@ class Problem extends Component<IProps, IState> {
                     </ProblemInfoBar>
                     <hr style={{marginTop: "-40px"}}/>
                     <Text component={TextVariants.p}><ReactMarkdown className={"problem-statement-area"} source={this.state.data!.problemStatement}/></Text>
+                    <hr />
+                    <Button css={{}} onClick={() => {this.props.history.goBack();}}>Back</Button>
                 </TextContent>
             </motion.div>
         );

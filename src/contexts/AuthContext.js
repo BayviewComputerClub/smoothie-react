@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {isAuth} from "../api/Auth";
 
 export const defaultAuthState = {
     loggedIn: false,
@@ -26,9 +27,19 @@ export class AuthProvider extends Component {
         } else {
             this.state = defaultAuthState;
         }
-
         // Add a "setState" function which calls setState here.
         this.state.setState = this.setContextState;
+
+        this.setAuthStatus();
+    }
+
+    async setAuthStatus() {
+        if( !(await isAuth()) ) {
+            console.log("User is *not* logged in.");
+            this.setContextState({loggedIn: false});
+        } else {
+            console.log("User is logged in.")
+        }
     }
 
     setContextState = async (state) => {

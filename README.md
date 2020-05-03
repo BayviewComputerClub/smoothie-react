@@ -1,8 +1,8 @@
-# smoothie-react (unsupported)
-
-**This repository is no longer maintained**
+# smoothie-react
 
 The new(?) user interface for Smoothie (built in React).
+
+because splitting up work is better:tm: (maybe)
 
 Uses smoothie-web as a backend, make sure to have that running.
 

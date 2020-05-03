@@ -36,6 +36,7 @@ import Problem from "./routes/Problem";
 // Routes
 import Home from "./routes/Home";
 import ProblemList from "./routes/ProblemList";
+import ProblemSubmission from "./routes/ProblemSubmission";
 
 // Helpers
 import {AuthContext, defaultAuthState} from "./contexts/AuthContext";
@@ -151,6 +152,7 @@ class App extends React.Component {
                     <PageSection variant={PageSectionVariants.light}>
                         <AnimatePresence exitBeforeEnter>
                             <Switch>
+                                <Route component={ProblemSubmission} path="/problems/submissions/:id" />
                                 <Route component={Problem} path="/problems/:id" />
                                 <Route component={ProblemList} path="/problems" />
                                 <Route component={Rankings} path="/ranking" />
