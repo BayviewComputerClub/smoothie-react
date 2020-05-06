@@ -32,6 +32,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import RouterNavItem from "./components/RouterNavItem";
 import LoginModal from "./components/LoginModal";
 import Problem from "./routes/Problem";
+import ContestClockBox from "./components/ContestClockBox";
 
 // Routes
 import Home from "./routes/Home";
@@ -41,7 +42,7 @@ import ProblemSubmission from "./routes/ProblemSubmission";
 // Helpers
 import {AuthContext, defaultAuthState} from "./contexts/AuthContext";
 import Rankings from "./routes/Rankings";
-
+import ContestList from "./routes/contests/ContestList";
 
 class App extends React.Component {
     constructor(props) {
@@ -149,12 +150,14 @@ class App extends React.Component {
         return (
             <Router>
                 <Page style={{height: "100vh"}} header={Header} sidebar={Sidebar}>
+                    <ContestClockBox />
                     <PageSection variant={PageSectionVariants.light}>
                         <AnimatePresence exitBeforeEnter>
                             <Switch>
                                 <Route component={ProblemSubmission} path="/problems/submissions/:id" />
                                 <Route component={Problem} path="/problems/:id" />
                                 <Route component={ProblemList} path="/problems" />
+                                <Route component={ContestList} path="/contests" />
                                 <Route component={Rankings} path="/ranking" />
                                 <Route component={Home} path="/" />
                             </Switch>

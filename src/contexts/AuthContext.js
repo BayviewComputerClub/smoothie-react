@@ -6,8 +6,8 @@ export const defaultAuthState = {
     username: "",
     loginModal: false,
 
-    isContest: true,
-    contestName: "",
+    isContest: false,
+    contest: {},
 
     isError: true,
     errorMsg: ""

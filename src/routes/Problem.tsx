@@ -24,6 +24,8 @@ import IProblem from "../api/interfaces/IProblem";
 import PageVariant from "../components/PageVariant";
 import {motion} from "framer-motion";
 import WaitingSpinner from "../components/WaitingSpinner";
+import SmoothieProblem from "../components/SmoothieProblem";
+import {isAuth} from "../api/Auth";
 
 interface IProps {
     match: any,
@@ -69,6 +71,7 @@ class Problem extends Component<IProps, IState> {
         if(this.state.loading) return (
             <WaitingSpinner />
         );
+
         return (
             <motion.div initial={"initial"} animate={"animate"} exit={"exit"} variants={PageVariant} key={window.location.pathname}>
                 <ProblemSubmitModal history={this.props.history} problemID={this.props.match.params.id} open={this.state.submitModal} onClose={() => {this.setState({submitModal: false})}} />
@@ -76,32 +79,19 @@ class Problem extends Component<IProps, IState> {
                     <Text component={TextVariants.h1}>{this.state.data!.prettyName}</Text>
                     <hr />
 
-                    <Button css={{}} onClick={async () => {
-                        //await submitProblemSolution("aplusb")
-                        this.setState({submitModal: true});
-                    }} >Submit Solution</Button>
-                    <br /><br /><hr />
+                    {
+                        this.context.loggedIn ?
+                            <div><Button css={{}} onClick={async () => {
+                                //await submitProblemSolution("aplusb")
+                                this.setState({submitModal: true});
+                            }} >Submit Solution</Button><br /><br /></div>
+                            :
+                            <p>You must be logged in to submit a problem solution!</p>
+                    }
+                    <hr />
 
-                    <ProblemInfoBar>
-                        <ProblemInfoBarItem>
-                            <ProblemInfoBarTitle style={{marginLeft: "10px"}}><MdDataUsage />Points</ProblemInfoBarTitle>
-                            <ProblemInfoBarItemContent>{this.state.data?.totalPointsWorth}</ProblemInfoBarItemContent>
-                        </ProblemInfoBarItem>
-                        <ProblemInfoBarItem>
-                            <ProblemInfoBarTitle><MdTimer/>Time Limit</ProblemInfoBarTitle>
-                            <ProblemInfoBarItemContent>{this.state.data?.limits[0].timeLimit}</ProblemInfoBarItemContent>
-                        </ProblemInfoBarItem>
-                        <ProblemInfoBarItem>
-                            <ProblemInfoBarTitle><MdLinearScale/>Memory Limit</ProblemInfoBarTitle>
-                            <ProblemInfoBarItemContent>{this.state.data?.limits[0].memoryLimit}</ProblemInfoBarItemContent>
-                        </ProblemInfoBarItem>
-                        <ProblemInfoBarItem>
-                            <ProblemInfoBarTitle>Created</ProblemInfoBarTitle>
-                            <ProblemInfoBarItemContent><Moment>{this.state.data?.timeCreated}</Moment></ProblemInfoBarItemContent>
-                        </ProblemInfoBarItem>
-                    </ProblemInfoBar>
-                    <hr style={{marginTop: "-40px"}}/>
-                    <Text component={TextVariants.p}><ReactMarkdown className={"problem-statement-area"} source={this.state.data!.problemStatement}/></Text>
+                    <SmoothieProblem problem={this.state.data!} />
+
                     <hr />
                     <Button css={{}} onClick={() => {this.props.history.goBack();}}>Back</Button>
                 </TextContent>
