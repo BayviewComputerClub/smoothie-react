@@ -27,3 +27,6 @@ export async function login(username: string, password: string): Promise<boolean
 export async function isAuth(): Promise<boolean> {
     return ( await getAPI<AxiosResponse<boolean>>("auth-status") ).data
 }
+export async function authInfo(): Promise<boolean> {
+    return ( await getAPI<AxiosResponse<boolean>>("auth-info") ).data
+}

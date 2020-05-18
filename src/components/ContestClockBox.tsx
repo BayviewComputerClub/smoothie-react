@@ -63,16 +63,35 @@ function startContestClockBox() {
     updateCountDown();
     setInterval(updateCountDown, 1000);
 }
-
-class ContestClockBox extends Component<any, any> {
-    componentDidMount(): void {
-        if(this.context.isContest) {
-            startContestClockBox();
+interface IState {
+    locallyStarted: boolean
+}
+class ContestClockBox extends Component<any, IState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            locallyStarted: false
         }
     }
 
+    /*componentDidMount(): void {
+        if(this.context.isContest) {
+            startContestClockBox();
+        }
+    }*/
+
     render() {
         if(this.context.isContest) {
+            if(!this.state.locallyStarted) {
+                setTimeout(() => {
+                    try {
+                        startContestClockBox();
+                    } catch(e) {
+                        console.log("Todo: rewrite contest clock box");
+                    }
+                    this.setState({locallyStarted: false});
+                }, 2000);
+            }
             return (
                 <Draggable>
                     <ClockBox id={"contest-clock-box"}>

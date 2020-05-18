@@ -38,11 +38,12 @@ import ContestClockBox from "./components/ContestClockBox";
 import Home from "./routes/Home";
 import ProblemList from "./routes/ProblemList";
 import ProblemSubmission from "./routes/ProblemSubmission";
+import ContestList from "./routes/contests/ContestList";
+import Contest from "./routes/contests/Contest";
 
 // Helpers
 import {AuthContext, defaultAuthState} from "./contexts/AuthContext";
 import Rankings from "./routes/Rankings";
-import ContestList from "./routes/contests/ContestList";
 
 class App extends React.Component {
     constructor(props) {
@@ -101,7 +102,6 @@ class App extends React.Component {
         );
 
         // Nav Things
-
         const NavAnimation = {
             visible: {
                 opacity: 1,
@@ -177,6 +177,9 @@ class App extends React.Component {
                                 <TextListItem component="dt">Smoothie-React Version</TextListItem>
                                 <TextListItem component="dd">1.0 - InDev</TextListItem>
                             </TextList>
+                            <hr />
+                            <p>Smoothie not working correctly?</p>
+                            <Button onClick={() => this.context.resetContext()}>Reset Application State</Button>
                         </TextContent>
                     </AboutModal>
 

@@ -10,7 +10,6 @@ export async function getProblem(name: string): Promise<AxiosResponse<IProblem>>
     return await getAPI<IProblem>("problems/" + name);
 }
 
-
 export async function submitProblemSolution(name: string, code: string): Promise<void> {
     console.log("~ Sending Problem Submission/Solution ~");
     let data = {

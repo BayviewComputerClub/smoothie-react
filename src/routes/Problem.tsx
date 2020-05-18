@@ -78,7 +78,6 @@ class Problem extends Component<IProps, IState> {
                 <TextContent>
                     <Text component={TextVariants.h1}>{this.state.data!.prettyName}</Text>
                     <hr />
-
                     {
                         this.context.loggedIn ?
                             <div><Button css={{}} onClick={async () => {
